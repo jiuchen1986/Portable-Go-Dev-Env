@@ -1,5 +1,5 @@
 # Portable-Go-Dev-Env
-Creating a portable environment for golang development with:
+Creating portable environments for golang development with:
 
 
 	Vagrant from the Hashicorp to create a VM-based environment

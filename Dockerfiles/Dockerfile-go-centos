@@ -3,3 +3,20 @@
 ### from a centos base image            ###
 ### installing the golang environment   ###
 ###########################################
+From centos:7
+
+ENV GOROOT=/usr/lib/golang \
+    GOBIN=/home/my-golang/bin GOPATH=/home/my-golang/src
+
+RUN yum -y update && yum clean all && \
+  yum -y install vim && \
+  yum -y install golang && \
+  mkdir -p /home/my-golang/{src,pkg,bin} && \
+  echo 'export PATH=$PATH:$GOROOT/bin' \
+  > /etc/profile.d/go.sh && \
+  source /etc/profile.d/go.sh
+  
+# CMD ["-c", "go version"]
+
+ENTRYPOINT ["/bin/bash"]
+

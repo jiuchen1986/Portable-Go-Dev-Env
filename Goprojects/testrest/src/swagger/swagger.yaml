@@ -1,0 +1,69 @@
+basePath: /api
+consumes:
+- application/json
+host: localhost:8081
+info:
+  description: A restful service for test
+  title: TEST REST SERVICE
+  version: ""
+paths:
+  /{svcLo}/:
+    get:
+      description: return the local service
+      operationId: Test Service#local service
+      parameters:
+      - description: local service
+        in: path
+        name: svcLo
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+        "404":
+          description: Not Found
+      schemes:
+      - http
+      summary: local service Test Service
+      tags:
+      - Test Service
+  /{svcLo}/{svcTo}/{svcOther}:
+    get:
+      description: follow the service chain to the next service
+      operationId: Test Service#service chain
+      parameters:
+      - description: local service
+        in: path
+        name: svcLo
+        required: true
+        type: string
+      - description: other services following the service chain
+        in: path
+        name: svcOther
+        required: true
+        type: string
+      - description: next service
+        in: path
+        name: svcTo
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+        "404":
+          description: Not Found
+      schemes:
+      - http
+      summary: service chain Test Service
+      tags:
+      - Test Service
+produces:
+- application/json
+responses:
+  NotFound:
+    description: Not Found
+  OK:
+    description: OK
+schemes:
+- http
+swagger: "2.0"

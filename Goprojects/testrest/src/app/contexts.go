@@ -16,7 +16,7 @@ import (
 	"net/http"
 )
 
-// LocalServiceTestServiceContext provides the Test Service local service action context.
+// LocalServiceTestServiceContext provides the TestService local_service action context.
 type LocalServiceTestServiceContext struct {
 	context.Context
 	*goa.ResponseData
@@ -25,7 +25,7 @@ type LocalServiceTestServiceContext struct {
 }
 
 // NewLocalServiceTestServiceContext parses the incoming request URL and body, performs validations and creates the
-// context used by the Test Service controller local service action.
+// context used by the TestService controller local_service action.
 func NewLocalServiceTestServiceContext(ctx context.Context, r *http.Request, service *goa.Service) (*LocalServiceTestServiceContext, error) {
 	var err error
 	resp := goa.ContextResponse(ctx)
@@ -57,7 +57,7 @@ func (ctx *LocalServiceTestServiceContext) NotFound() error {
 	return nil
 }
 
-// ServiceChainTestServiceContext provides the Test Service service chain action context.
+// ServiceChainTestServiceContext provides the TestService service_chain action context.
 type ServiceChainTestServiceContext struct {
 	context.Context
 	*goa.ResponseData
@@ -68,7 +68,7 @@ type ServiceChainTestServiceContext struct {
 }
 
 // NewServiceChainTestServiceContext parses the incoming request URL and body, performs validations and creates the
-// context used by the Test Service controller service chain action.
+// context used by the TestService controller service_chain action.
 func NewServiceChainTestServiceContext(ctx context.Context, r *http.Request, service *goa.Service) (*ServiceChainTestServiceContext, error) {
 	var err error
 	resp := goa.ContextResponse(ctx)

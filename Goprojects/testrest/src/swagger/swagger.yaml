@@ -10,7 +10,7 @@ paths:
   /{svcLo}/:
     get:
       description: return the local service
-      operationId: Test Service#local service
+      operationId: TestService#local_service
       parameters:
       - description: local service
         in: path
@@ -24,13 +24,13 @@ paths:
           description: Not Found
       schemes:
       - http
-      summary: local service Test Service
+      summary: local_service TestService
       tags:
-      - Test Service
+      - TestService
   /{svcLo}/{svcTo}/{svcOther}:
     get:
       description: follow the service chain to the next service
-      operationId: Test Service#service chain
+      operationId: TestService#service_chain
       parameters:
       - description: local service
         in: path
@@ -54,9 +54,9 @@ paths:
           description: Not Found
       schemes:
       - http
-      summary: service chain Test Service
+      summary: service_chain TestService
       tags:
-      - Test Service
+      - TestService
 produces:
 - application/json
 responses:

@@ -25,10 +25,10 @@ var _ = API("TEST REST API", func() {        // "TEST REST API" is the name of t
     
 })
 
-var _ = Resource("Test Service", func() {     // Defines the Test Service resource
+var _ = Resource("TestService", func() {     // Defines the Test Service resource
     DefaultMedia("application/json")
     
-    Action("local service", func() {     // Defines the local service action
+    Action("local_service", func() {     // Defines the local service action
         Routing(GET("/:svcLo/"))         // The relative path to the local service endpoints
         Description("return the local service")
         Params(func() {
@@ -39,7 +39,7 @@ var _ = Resource("Test Service", func() {     // Defines the Test Service resour
         Response(NotFound)
     })
 
-    Action("service chain", func() {     // Defines the local service action
+    Action("service_chain", func() {     // Defines the local service action
         Routing(GET("/:svcLo/:svcTo/*svcOther"))         // The relative path to the service chain endpoints
         Description("follow the service chain to the next service")
         Params(func() {

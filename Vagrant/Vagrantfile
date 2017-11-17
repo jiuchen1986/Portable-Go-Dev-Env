@@ -83,6 +83,6 @@ Vagrant.configure("2") do |config|
     dpkg -i /home/ubuntu/Packages/docker-ce_17.09.0~ce-0~ubuntu_amd64.deb
     docker image pull golang:1.9
     cd /home/ubuntu/Dockerfiles
-    docker build -f Dockerfile-goa -t godev:1.0 -t godev:latest .
+    docker build -f Dockerfile-goa -t godev:2.0 -t godev:latest .
   SHELL
 end

@@ -51,7 +51,7 @@ func MountTestServiceController(service *goa.Service, ctrl TestServiceController
 		}
 		return ctrl.LocalService(rctx)
 	}
-	service.Mux.Handle("GET", "/api/:svcLo/", ctrl.MuxHandler("local service", h, nil))
+	service.Mux.Handle("GET", "/api/:svcLo/", ctrl.MuxHandler("local_service", h, nil))
 	service.LogInfo("mount", "ctrl", "TestService", "action", "LocalService", "route", "GET /api/:svcLo/")
 
 	h = func(ctx context.Context, rw http.ResponseWriter, req *http.Request) error {
@@ -66,6 +66,6 @@ func MountTestServiceController(service *goa.Service, ctrl TestServiceController
 		}
 		return ctrl.ServiceChain(rctx)
 	}
-	service.Mux.Handle("GET", "/api/:svcLo/:svcTo/*svcOther", ctrl.MuxHandler("service chain", h, nil))
+	service.Mux.Handle("GET", "/api/:svcLo/:svcTo/*svcOther", ctrl.MuxHandler("service_chain", h, nil))
 	service.LogInfo("mount", "ctrl", "TestService", "action", "ServiceChain", "route", "GET /api/:svcLo/:svcTo/*svcOther")
 }

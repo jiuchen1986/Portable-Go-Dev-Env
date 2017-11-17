@@ -28,14 +28,14 @@ import (
 )
 
 type (
-	// LocalServiceTestServiceCommand is the command line data structure for the local service action of Test Service
+	// LocalServiceTestServiceCommand is the command line data structure for the local_service action of TestService
 	LocalServiceTestServiceCommand struct {
 		// local service
 		SvcLo       string
 		PrettyPrint bool
 	}
 
-	// ServiceChainTestServiceCommand is the command line data structure for the service chain action of Test Service
+	// ServiceChainTestServiceCommand is the command line data structure for the service_chain action of TestService
 	ServiceChainTestServiceCommand struct {
 		// local service
 		SvcLo string
@@ -56,7 +56,7 @@ func RegisterCommands(app *cobra.Command, c *client.Client) {
 	}
 	tmp1 := new(LocalServiceTestServiceCommand)
 	sub = &cobra.Command{
-		Use:   `test -service ["/api/SVCLO/"]`,
+		Use:   `test-service ["/api/SVCLO/"]`,
 		Short: ``,
 		RunE:  func(cmd *cobra.Command, args []string) error { return tmp1.Run(c, args) },
 	}
@@ -70,7 +70,7 @@ func RegisterCommands(app *cobra.Command, c *client.Client) {
 	}
 	tmp2 := new(ServiceChainTestServiceCommand)
 	sub = &cobra.Command{
-		Use:   `test -service ["/api/SVCLO/SVCTO/*svcOther"]`,
+		Use:   `test-service ["/api/SVCLO/SVCTO/*svcOther"]`,
 		Short: ``,
 		RunE:  func(cmd *cobra.Command, args []string) error { return tmp2.Run(c, args) },
 	}

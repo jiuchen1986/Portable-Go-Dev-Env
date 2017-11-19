@@ -39,6 +39,14 @@ func (c *TestServiceController) ServiceChain(ctx *app.ServiceChainTestServiceCon
 	// TestServiceController_ServiceChain: start_implement
 
 	// Put your logic here
+    
+    if h, err := handler.NewHandler(ctx); err != nil {
+        return err
+    } else {
+        if e := h.Process(); e != nil {
+            return e
+        }
+    }
 
 	// TestServiceController_ServiceChain: end_implement
 	return nil

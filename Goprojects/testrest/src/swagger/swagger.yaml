@@ -27,7 +27,7 @@ paths:
       summary: local_service TestService
       tags:
       - TestService
-  /{svcLo}/{svcTo}/{svcOther}:
+  /{svcLo}/{svcOther}:
     get:
       description: follow the service chain to the next service
       operationId: TestService#service_chain
@@ -40,11 +40,6 @@ paths:
       - description: other services following the service chain
         in: path
         name: svcOther
-        required: true
-        type: string
-      - description: next service
-        in: path
-        name: svcTo
         required: true
         type: string
       responses:

@@ -40,9 +40,7 @@ type (
 		// local service
 		SvcLo string
 		// other services following the service chain
-		SvcOther string
-		// next service
-		SvcTo       string
+		SvcOther    string
 		PrettyPrint bool
 	}
 )
@@ -70,7 +68,7 @@ func RegisterCommands(app *cobra.Command, c *client.Client) {
 	}
 	tmp2 := new(ServiceChainTestServiceCommand)
 	sub = &cobra.Command{
-		Use:   `test-service ["/api/SVCLO/SVCTO/*svcOther"]`,
+		Use:   `test-service ["/api/SVCLO/*svcOther"]`,
 		Short: ``,
 		RunE:  func(cmd *cobra.Command, args []string) error { return tmp2.Run(c, args) },
 	}
@@ -265,7 +263,7 @@ func (cmd *ServiceChainTestServiceCommand) Run(c *client.Client, args []string) 
 	if len(args) > 0 {
 		path = args[0]
 	} else {
-		path = fmt.Sprintf("/api/%v/%v/%v", url.QueryEscape(cmd.SvcLo), url.QueryEscape(cmd.SvcTo), url.QueryEscape(cmd.SvcOther))
+		path = fmt.Sprintf("/api/%v/%v", url.QueryEscape(cmd.SvcLo), url.QueryEscape(cmd.SvcOther))
 	}
 	logger := goa.NewLogger(log.New(os.Stderr, "", log.LstdFlags))
 	ctx := goa.WithLogger(context.Background(), logger)
@@ -285,6 +283,4 @@ func (cmd *ServiceChainTestServiceCommand) RegisterFlags(cc *cobra.Command, c *c
 	cc.Flags().StringVar(&cmd.SvcLo, "svcLo", svcLo, `local service`)
 	var svcOther string
 	cc.Flags().StringVar(&cmd.SvcOther, "svcOther", svcOther, `other services following the service chain`)
-	var svcTo string
-	cc.Flags().StringVar(&cmd.SvcTo, "svcTo", svcTo, `next service`)
 }

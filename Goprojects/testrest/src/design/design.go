@@ -40,12 +40,10 @@ var _ = Resource("TestService", func() {     // Defines the Test Service resourc
     })
 
     Action("service_chain", func() {     // Defines the local service action
-        Routing(GET("/:svcLo/:svcTo/*svcOther"))         // The relative path to the service chain endpoints
+        Routing(GET("/:svcLo/*svcOther"))         // The relative path to the service chain endpoints
         Description("follow the service chain to the next service")
         Params(func() {
             Param("svcLo", String, "local service")
-            Param("svcTo", String, "next service")  // Defines svcTo parameter as path segment
-                                                    // captured by :svcTo
             Param("svcOther", String, "other services following the service chain")
         })
         Response(OK)

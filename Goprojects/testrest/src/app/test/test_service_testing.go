@@ -142,7 +142,7 @@ func LocalServiceTestServiceOK(t goatest.TInterface, ctx context.Context, servic
 // It returns the response writer so it's possible to inspect the response headers.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func ServiceChainTestServiceNotFound(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.TestServiceController, svcLo string, svcTo string, svcOther string) http.ResponseWriter {
+func ServiceChainTestServiceNotFound(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.TestServiceController, svcLo string, svcOther string) http.ResponseWriter {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -163,7 +163,7 @@ func ServiceChainTestServiceNotFound(t goatest.TInterface, ctx context.Context, 
 	// Setup request context
 	rw := httptest.NewRecorder()
 	u := &url.URL{
-		Path: fmt.Sprintf("/api/%v/%v/%v", svcLo, svcTo, svcOther),
+		Path: fmt.Sprintf("/api/%v/%v", svcLo, svcOther),
 	}
 	req, err := http.NewRequest("GET", u.String(), nil)
 	if err != nil {
@@ -171,7 +171,6 @@ func ServiceChainTestServiceNotFound(t goatest.TInterface, ctx context.Context, 
 	}
 	prms := url.Values{}
 	prms["svcLo"] = []string{fmt.Sprintf("%v", svcLo)}
-	prms["svcTo"] = []string{fmt.Sprintf("%v", svcTo)}
 	prms["svcOther"] = []string{fmt.Sprintf("%v", svcOther)}
 	if ctx == nil {
 		ctx = context.Background()
@@ -201,7 +200,7 @@ func ServiceChainTestServiceNotFound(t goatest.TInterface, ctx context.Context, 
 // It returns the response writer so it's possible to inspect the response headers.
 // If ctx is nil then context.Background() is used.
 // If service is nil then a default service is created.
-func ServiceChainTestServiceOK(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.TestServiceController, svcLo string, svcTo string, svcOther string) http.ResponseWriter {
+func ServiceChainTestServiceOK(t goatest.TInterface, ctx context.Context, service *goa.Service, ctrl app.TestServiceController, svcLo string, svcOther string) http.ResponseWriter {
 	// Setup service
 	var (
 		logBuf bytes.Buffer
@@ -222,7 +221,7 @@ func ServiceChainTestServiceOK(t goatest.TInterface, ctx context.Context, servic
 	// Setup request context
 	rw := httptest.NewRecorder()
 	u := &url.URL{
-		Path: fmt.Sprintf("/api/%v/%v/%v", svcLo, svcTo, svcOther),
+		Path: fmt.Sprintf("/api/%v/%v", svcLo, svcOther),
 	}
 	req, err := http.NewRequest("GET", u.String(), nil)
 	if err != nil {
@@ -230,7 +229,6 @@ func ServiceChainTestServiceOK(t goatest.TInterface, ctx context.Context, servic
 	}
 	prms := url.Values{}
 	prms["svcLo"] = []string{fmt.Sprintf("%v", svcLo)}
-	prms["svcTo"] = []string{fmt.Sprintf("%v", svcTo)}
 	prms["svcOther"] = []string{fmt.Sprintf("%v", svcOther)}
 	if ctx == nil {
 		ctx = context.Background()

@@ -48,12 +48,11 @@ func (c *Client) NewLocalServiceTestServiceRequest(ctx context.Context, path str
 }
 
 // ServiceChainTestServicePath computes a request path to the service_chain action of TestService.
-func ServiceChainTestServicePath(svcLo string, svcTo string, svcOther string) string {
+func ServiceChainTestServicePath(svcLo string, svcOther string) string {
 	param0 := svcLo
-	param1 := svcTo
-	param2 := svcOther
+	param1 := svcOther
 
-	return fmt.Sprintf("/api/%s/%s/%s", param0, param1, param2)
+	return fmt.Sprintf("/api/%s/%s", param0, param1)
 }
 
 // follow the service chain to the next service

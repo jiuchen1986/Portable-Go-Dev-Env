@@ -64,7 +64,6 @@ type ServiceChainTestServiceContext struct {
 	*goa.RequestData
 	SvcLo    string
 	SvcOther string
-	SvcTo    string
 }
 
 // NewServiceChainTestServiceContext parses the incoming request URL and body, performs validations and creates the
@@ -85,11 +84,6 @@ func NewServiceChainTestServiceContext(ctx context.Context, r *http.Request, ser
 	if len(paramSvcOther) > 0 {
 		rawSvcOther := paramSvcOther[0]
 		rctx.SvcOther = rawSvcOther
-	}
-	paramSvcTo := req.Params["svcTo"]
-	if len(paramSvcTo) > 0 {
-		rawSvcTo := paramSvcTo[0]
-		rctx.SvcTo = rawSvcTo
 	}
 	return &rctx, err
 }

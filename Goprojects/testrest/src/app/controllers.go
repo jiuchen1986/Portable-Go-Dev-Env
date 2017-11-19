@@ -66,6 +66,6 @@ func MountTestServiceController(service *goa.Service, ctrl TestServiceController
 		}
 		return ctrl.ServiceChain(rctx)
 	}
-	service.Mux.Handle("GET", "/api/:svcLo/:svcTo/*svcOther", ctrl.MuxHandler("service_chain", h, nil))
-	service.LogInfo("mount", "ctrl", "TestService", "action", "ServiceChain", "route", "GET /api/:svcLo/:svcTo/*svcOther")
+	service.Mux.Handle("GET", "/api/:svcLo/*svcOther", ctrl.MuxHandler("service_chain", h, nil))
+	service.LogInfo("mount", "ctrl", "TestService", "action", "ServiceChain", "route", "GET /api/:svcLo/*svcOther")
 }

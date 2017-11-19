@@ -23,22 +23,14 @@ func NewLocalServiceHandler(ctx *app.LocalServiceTestServiceContext) (h *LocalSe
 
 func (h *LocalServiceHandler) Process() error {  // the main requests process of the handler
     cha := make([]*types.ServiceStatus, 1)
-    cha[0] = &types.ServiceStatus{0, "", ""}    
-    resp := &types.TestServiceResponse{1, cha}
+    var er error
+    cha[0], er = GetLocalServiceStatus() 
+    if er != nil {
+        h.Ctx.NotFound()
+        return er
+    }    
+    resp := &types.TestServiceResponse{"1", cha}
     
-    resp.Chain[0].Order = 1
-    if e := os.Getenv("TEST_SERVICE_NAME"); strings.Compare(e, "") != 0 {
-        resp.Chain[0].ServName = e
-    } else {
-        h.Ctx.NotFound()
-        return errors.New("Env TEST_SERVICE_NAME is missing!")
-    }
-    if e := os.Getenv("TEST_SERVICE_VERSION"); strings.Compare(e, "") != 0 {
-        resp.Chain[0].Version = e
-    } else {
-        h.Ctx.NotFound()
-        return errors.New("Env TEST_SERVICE_VERSION is missing!")
-    }
     if strings.Compare(h.Ctx.SvcLo, resp.Chain[0].ServName) != 0 {
         return h.Ctx.NotFound()
     } else {
@@ -56,4 +48,20 @@ func (h *LocalServiceHandler) Process() error {  // the main requests process of
         }
     }
     return nil    
+}
+
+func GetLocalServiceStatus() (st *types.ServiceStatus, err error) {
+    st = &types.ServiceStatus{"1", "", ""}
+    
+    if e := os.Getenv("TEST_SERVICE_NAME"); strings.Compare(e, "") != 0 {
+        st.ServName = e
+    } else {
+        return nil, errors.New("Env TEST_SERVICE_NAME is missing!")
+    }
+    if e := os.Getenv("TEST_SERVICE_VERSION"); strings.Compare(e, "") != 0 {
+        st.Version = e
+    } else {
+        return nil, errors.New("Env TEST_SERVICE_VERSION is missing!")
+    }
+    return st, nil
 }

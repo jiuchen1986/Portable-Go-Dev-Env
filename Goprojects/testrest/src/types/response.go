@@ -5,6 +5,8 @@ package types
 import (
     "errors"
     "encoding/json"
+    "fmt"
+    "strconv"
     
     "utils"
     
@@ -12,13 +14,13 @@ import (
 )
 
 type ServiceStatus struct {  // The service status of the local service
-    Order int `json:"order"`  // The order of the local service from the end of the service chain
+    Order string `json:"order"`  // The order of the local service from the end of the service chain
     ServName string `json:"service"`  // The name of the local service
     Version string `json:"version"`  // The version of the local service
 }
 
 type TestServiceResponse struct {   // The response body structure used between test services
-    Len int `json:"length"`  // The length of the test services from the local service to the end of the service chain
+    Len string `json:"length"`  // The length of the test services from the local service to the end of the service chain
     Chain []*ServiceStatus `json:"chain"` // The status of the services from the local service to the end of the service chain
 }
 
@@ -47,16 +49,21 @@ func RespDecode(b []byte) (r *TestServiceResponse, err error) {  // Decode a res
     */
     
     json_str := utils.Convert(b)
-    l := gjson.Get(json_str, "length").Value().(int)    
+    fmt.Println("Get a response: ", json_str)
+    l := gjson.Get(json_str, "length").String()    
     cha_r := gjson.Get(json_str, "chain").Array()
     
-    if l != len(cha_r) {
-        return nil, errors.New("The length of the service chain is not matched!")
+    l_int , err := strconv.Atoi(l)
+    if err != nil {
+        return nil, err
+    }
+    if l_int != len(cha_r) {
+       return nil, errors.New("The length of the service chain is not matched!")
     }
     
     cha := make([]*ServiceStatus, len(cha_r))
     for i, st_r := range cha_r {
-        cha[i] = &ServiceStatus{gjson.Get(st_r.String(), "order").Value().(int), 
+        cha[i] = &ServiceStatus{gjson.Get(st_r.String(), "order").String(), 
                                 gjson.Get(st_r.String(), "service").String(), 
                                 gjson.Get(st_r.String(), "version").String()}
     }

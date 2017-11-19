@@ -21,8 +21,8 @@ func NewHandler(ctx ITestServiceContext) (ih IHandler, err error) {  // return a
     switch c := ctx.(type) {
     case *app.LocalServiceTestServiceContext:
         return NewLocalServiceHandler(c)
-    // case *app.ServiceChainTestServiceContext:
-    //     return NewServiceChainHandler(c)
+    case *app.ServiceChainTestServiceContext:
+        return NewServiceChainHandler(c)
     default:
         err = errors.New("Unknown type of the inputing test service context!")
     }

@@ -21,6 +21,7 @@ var trace_header = [...]string{"x-request-id",
                                "x-b3-sampled",
                                "x-b3-flags",
                                "x-ot-span-context"}  // Headers for distributed tracing
+const SVC_TO_PORT = "8082"   // The port of the next service
 
 type ServiceChainHandler struct {   // the handler processing the requests for the local service
     Ctx *app.ServiceChainTestServiceContext
@@ -70,8 +71,10 @@ func (h *ServiceChainHandler) Process() error {  // the main requests process of
 }
 
 func (h *ServiceChainHandler) FindNextService() (host, port string, err error) {  // Return the endpoint of the next service
-    fmt.Println("The next service: ", strings.Split(h.Ctx.SvcOther, "/")[0])
-    return "10.0.2.15", "8082", nil
+    svcTo := strings.Split(h.Ctx.SvcOther, "/")[0]
+    fmt.Println("The next service: ", svcTo)
+    return svcTo, "8082", nil
+    // return "10.0.2.15", "8082", nil
 }
 
 func PropTraceInfo(ih, oh *http.Header) error {  // Collect and progapate the headers from the incoming request to the outgoing request for tracing

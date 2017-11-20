@@ -73,8 +73,8 @@ func (h *ServiceChainHandler) Process() error {  // the main requests process of
 func (h *ServiceChainHandler) FindNextService() (host, port string, err error) {  // Return the endpoint of the next service
     svcTo := strings.Split(h.Ctx.SvcOther, "/")[0]
     fmt.Println("The next service: ", svcTo)
-    // return svcTo, "8082", nil
-    return "10.0.2.15", "8082", nil
+    return svcTo, "8082", nil
+    // return "10.0.2.15", "8082", nil
 }
 
 func PropTraceInfo(ih, oh *http.Header) error {  // Collect and progapate the headers from the incoming request to the outgoing request for tracing
